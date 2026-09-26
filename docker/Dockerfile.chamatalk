@@ -1,4 +1,4 @@
-FROM chatwoot/chatwoot:latest
+FROM chatwoot/chatwoot:latest-ce
 
 # Branding assets and defaults for Chamatalk installations.
 COPY public/brand-assets/chamatalk_white_11.png /app/public/brand-assets/chamatalk_white_11.png
