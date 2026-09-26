@@ -1,0 +1,11 @@
+FROM chatwoot/chatwoot:latest
+
+# Branding assets and defaults for Chamatalk installations.
+COPY public/brand-assets/chamatalk_white_11.png /app/public/brand-assets/chamatalk_white_11.png
+COPY public/brand-assets/chamatalk_symbol1.png /app/public/brand-assets/chamatalk_symbol1.png
+COPY public/manifest.json /app/public/manifest.json
+COPY config/installation_config.yml /app/config/installation_config.yml
+COPY app/views/installation/onboarding/index.html.erb /app/app/views/installation/onboarding/index.html.erb
+COPY app/views/super_admin/devise/sessions/new.html.erb /app/app/views/super_admin/devise/sessions/new.html.erb
+COPY app/views/super_admin/application/_navigation.html.erb /app/app/views/super_admin/application/_navigation.html.erb
+COPY app/views/layouts/vueapp.html.erb /app/app/views/layouts/vueapp.html.erb
