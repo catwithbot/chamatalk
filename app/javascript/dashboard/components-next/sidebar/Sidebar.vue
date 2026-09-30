@@ -876,6 +876,12 @@ const menuItems = computed(() => {
           to: accountScopedRoute('settings_templates'),
         },
         {
+          name: 'WhatsApp Quick Dispatch',
+          label: 'WhatsApp quick dispatch',
+          icon: 'i-lucide-send',
+          to: accountScopedRoute('settings_whatsapp_dispatch'),
+        },
+        {
           name: 'Settings Labels',
           label: t('SIDEBAR.LABELS'),
           icon: 'i-lucide-tags',

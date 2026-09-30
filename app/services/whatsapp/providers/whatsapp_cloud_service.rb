@@ -1,4 +1,22 @@
 class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseService
+  # Quick dispatch intentionally bypasses conversations and campaigns. The caller
+  # is responsible for enforcing Meta's 24-hour customer-service window.
+  def send_text(phone_number, body)
+    response = HTTParty.post(
+      "#{phone_id_path}/messages",
+      headers: api_headers,
+      body: {
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        **recipient_params(phone_number),
+        text: { body: body },
+        type: 'text'
+      }.to_json
+    )
+
+    process_response(response, nil)
+  end
+
   def send_message(phone_number, message)
     @message = message
 
