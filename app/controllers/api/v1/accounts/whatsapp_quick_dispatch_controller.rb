@@ -1,6 +1,10 @@
 class Api::V1::Accounts::WhatsappQuickDispatchController < Api::V1::Accounts::BaseController
   before_action :ensure_administrator
 
+  def show
+    render json: { templates: Whatsapp::QuickDispatchService.available_templates(account: Current.account) }
+  end
+
   def create
     return render json: { error: validation_error }, status: :unprocessable_entity if invalid_request?
 
@@ -8,7 +12,9 @@ class Api::V1::Accounts::WhatsappQuickDispatchController < Api::V1::Accounts::Ba
       account: Current.account,
       actor: Current.user,
       phone_numbers: params[:phone_numbers],
-      body: params[:body],
+      template_name: params[:template_name],
+      template_language: params[:template_language],
+      template_parameters: params[:template_parameters],
       remote_address: request.remote_ip
     ).perform
 
@@ -22,12 +28,10 @@ class Api::V1::Accounts::WhatsappQuickDispatchController < Api::V1::Accounts::Ba
   end
 
   def invalid_request?
-    params[:phone_numbers].blank? || params[:body].blank? || params[:body].to_s.length > 4096
+    params[:phone_numbers].blank? || params[:template_name].blank? || params[:template_language].blank?
   end
 
   def validation_error
-    return 'Messages are limited to 4096 characters.' if params[:body].to_s.length > 4096
-
-    'Provide at least one E.164 phone number and a message.'
+    'Informe ao menos um número E.164, o nome e o idioma do modelo aprovado.'
   end
 end

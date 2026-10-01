@@ -877,7 +877,7 @@ const menuItems = computed(() => {
         },
         {
           name: 'WhatsApp Quick Dispatch',
-          label: 'WhatsApp quick dispatch',
+          label: 'Disparo rápido pelo WhatsApp',
           icon: 'i-lucide-send',
           to: accountScopedRoute('settings_whatsapp_dispatch'),
         },
